@@ -1,0 +1,1013 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  overflow: hidden;
+  height: 100vh;
+  height: 100dvh;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(135deg, #ffeef7 0%, #ffe4f1 50%, #ffd4e9 100%);
+  min-height: 100vh;
+  height: 100vh;
+  height: 100dvh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-overflow-scrolling: touch;
+}
+
+body::before {
+  content: "";
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(
+    circle,
+    rgba(255, 182, 193, 0.3) 0%,
+    transparent 70%
+  );
+  border-radius: 50%;
+  top: -100px;
+  left: -100px;
+  animation: float 20s ease-in-out infinite;
+}
+
+body::after {
+  content: "";
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(
+    circle,
+    rgba(255, 192, 203, 0.2) 0%,
+    transparent 70%
+  );
+  border-radius: 50%;
+  bottom: -150px;
+  right: -150px;
+  animation: float 25s ease-in-out infinite reverse;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(50px, 50px) scale(1.1);
+  }
+}
+
+/* Intro Overlay Styles */
+.intro-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  background: linear-gradient(135deg, #ffeef7 0%, #ffe4f1 50%, #ffd4e9 100%);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition:
+    opacity 0.8s ease,
+    visibility 0.8s ease;
+  overflow: hidden;
+}
+
+.intro-overlay.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.intro-content {
+  text-align: center;
+  z-index: 10000;
+  animation: fadeInScale 1s ease-out;
+  pointer-events: none;
+  padding: 20px;
+  max-width: 90%;
+}
+
+.intro-title {
+  font-family: "Poppins", sans-serif;
+  font-size: 48px;
+  font-weight: 700;
+  color: #d4507f;
+  margin-bottom: 15px;
+  text-shadow:
+    2px 2px 0px rgba(180, 50, 90, 0.8),
+    4px 4px 0px rgba(150, 40, 80, 0.6),
+    -1px -1px 0px rgba(255, 140, 180, 0.6),
+    0px 0px 20px rgba(212, 80, 127, 0.4);
+  animation: glow 2s ease-in-out infinite;
+}
+
+.intro-subtitle {
+  font-family: "Poppins", sans-serif;
+  font-size: 24px;
+  font-weight: 400;
+  color: #e88bb1;
+  margin-bottom: 30px;
+  font-style: italic;
+}
+
+.petals-remaining {
+  font-family: "Poppins", sans-serif;
+  font-size: 20px;
+  color: #d4507f;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 10px 25px;
+  border-radius: 50px;
+  display: inline-block;
+  box-shadow: 0 4px 15px rgba(212, 80, 127, 0.3);
+  font-weight: 600;
+}
+
+#petalCount {
+  font-size: 32px;
+  font-weight: 700;
+  color: #ff1744;
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.8) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes glow {
+  0%,
+  100% {
+    text-shadow:
+      2px 2px 0px rgba(180, 50, 90, 0.8),
+      4px 4px 0px rgba(150, 40, 80, 0.6),
+      -1px -1px 0px rgba(255, 140, 180, 0.6),
+      0px 0px 20px rgba(212, 80, 127, 0.4);
+  }
+  50% {
+    text-shadow:
+      2px 2px 0px rgba(180, 50, 90, 0.9),
+      4px 4px 0px rgba(150, 40, 80, 0.7),
+      -1px -1px 0px rgba(255, 140, 180, 0.8),
+      0px 0px 30px rgba(212, 80, 127, 0.6),
+      0px 0px 40px rgba(255, 105, 180, 0.5);
+  }
+}
+
+/* Petals Styles */
+.petals-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  pointer-events: auto;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.petal {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  font-size: 60px;
+  cursor: pointer;
+  pointer-events: auto;
+  transition: all 0.3s ease;
+  z-index: 10001;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  filter: drop-shadow(0 4px 8px rgba(255, 105, 180, 0.4));
+  touch-action: manipulation;
+}
+
+.petal:hover {
+  transform: scale(1.3) rotate(20deg);
+  filter: drop-shadow(0 6px 12px rgba(255, 105, 180, 0.6));
+}
+
+.petal:active {
+  transform: scale(0.9);
+}
+
+.petal.removing {
+  animation: petalPop 0.5s ease-out forwards;
+}
+
+@keyframes petalPop {
+  0% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.5) rotate(180deg);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(0) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+@keyframes petalFloat {
+  0% {
+    transform: translateY(0) translateX(0) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-30px) translateX(20px) rotate(90deg);
+  }
+  50% {
+    transform: translateY(0) translateX(-20px) rotate(180deg);
+  }
+  75% {
+    transform: translateY(30px) translateX(10px) rotate(270deg);
+  }
+  100% {
+    transform: translateY(0) translateX(0) rotate(360deg);
+  }
+}
+
+.petal-float-1 {
+  animation: petalFloat 4s ease-in-out infinite;
+}
+.petal-float-2 {
+  animation: petalFloat 5s ease-in-out infinite 0.5s;
+}
+.petal-float-3 {
+  animation: petalFloat 6s ease-in-out infinite 1s;
+}
+.petal-float-4 {
+  animation: petalFloat 4.5s ease-in-out infinite 1.5s;
+}
+.petal-float-5 {
+  animation: petalFloat 5.5s ease-in-out infinite 2s;
+}
+
+.container {
+  text-align: center;
+  z-index: 1;
+  padding: 20px 15px;
+  max-width: 1200px;
+  width: 100%;
+  max-height: 100vh;
+  overflow: visible;
+}
+
+/* Polaroid Styling */
+.polaroid-container {
+  display: flex;
+  justify-content: center;
+  gap: 60px;
+  margin-bottom: 35px;
+  flex-wrap: wrap;
+}
+
+.polaroid {
+  background: #fff;
+  padding: 15px;
+  padding-bottom: 50px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  transform: rotate(0deg);
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.polaroid-left {
+  transform: rotate(-5deg);
+  animation-delay: 0.2s;
+}
+
+.polaroid-right {
+  transform: rotate(5deg);
+  animation-delay: 0.4s;
+}
+
+.polaroid:hover {
+  transform: rotate(0deg) scale(1.05) translateY(-10px);
+  box-shadow: 0 20px 40px rgba(255, 105, 180, 0.3);
+}
+
+.polaroid-image {
+  width: 200px;
+  height: 200px;
+  background: #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.polaroid-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  display: none;
+}
+
+.polaroid-image img[src]:not([src=""]) {
+  display: block;
+}
+
+/* Better positioning for portrait photos */
+#image1 {
+  object-position: center 20%;
+}
+
+#image2 {
+  object-position: center 15%;
+}
+
+.upload-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.9);
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.polaroid-image:has(img[src]:not([src=""])) .upload-overlay {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.polaroid-image .upload-overlay {
+  pointer-events: auto;
+}
+
+.upload-label {
+  cursor: pointer;
+  font-size: 40px;
+  transition: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: rgba(212, 80, 127, 0.1);
+}
+
+.upload-label:active {
+  transform: scale(1.1);
+}
+
+.file-input {
+  display: none;
+}
+
+.file-input:focus + .upload-label {
+  outline: 3px solid #d4507f;
+  outline-offset: 2px;
+}
+
+.polaroid-caption {
+  margin-top: 15px;
+  font-family: "Poppins", sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  color: #666;
+  font-style: italic;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px) rotate(0deg);
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Title Styling */
+.title {
+  margin-bottom: 30px;
+  animation: fadeIn 1s ease-out 0.6s both;
+}
+
+.title h1 {
+  font-size: 48px;
+  font-family: "Poppins", sans-serif;
+  color: #d4507f;
+  margin-bottom: 10px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-shadow:
+    2px 2px 0px rgba(180, 50, 90, 0.8),
+    4px 4px 0px rgba(150, 40, 80, 0.6),
+    -1px -1px 0px rgba(255, 140, 180, 0.6),
+    0px 0px 20px rgba(212, 80, 127, 0.4);
+}
+
+.subtitle {
+  font-size: 18px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  color: #e88bb1;
+  font-style: italic;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Countdown Styling */
+.countdown {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 30px;
+  animation: fadeIn 1s ease-out 0.8s both;
+  flex-wrap: wrap;
+}
+
+.time-box {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 15px;
+  padding: 25px 20px;
+  min-width: 120px;
+  box-shadow: 0 8px 25px rgba(212, 80, 127, 0.2);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: pulse 2s ease-in-out infinite;
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, 0.5);
+}
+
+.time-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 35px rgba(212, 80, 127, 0.35);
+  background: rgba(255, 255, 255, 1);
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+}
+
+.time-value {
+  font-size: 48px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  text-shadow:
+    2px 2px 0px rgba(180, 50, 90, 0.8),
+    4px 4px 0px rgba(150, 40, 80, 0.6),
+    6px 6px 0px rgba(120, 30, 70, 0.4),
+    -1px -1px 0px rgba(255, 140, 180, 0.6),
+    0px 0px 15px rgba(212, 80, 127, 0.5);
+  letter-spacing: 2px;
+}
+
+.time-box:hover .time-value {
+  color: #ff69b4;
+}
+
+.time-label {
+  font-size: 14px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  color: #999;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-top: 5px;
+}
+
+.separator {
+  font-size: 40px;
+  color: #d4507f;
+  font-weight: 300;
+  animation: blink 1.5s ease-in-out infinite;
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+
+/* Message Styling */
+.message {
+  font-size: 32px;
+  font-family: "Poppins", sans-serif;
+  color: #d4507f;
+  font-weight: 700;
+  min-height: 40px;
+  animation: fadeIn 1s ease-out 1s both;
+  text-shadow:
+    2px 2px 0px rgba(180, 50, 90, 0.6),
+    -1px -1px 0px rgba(255, 140, 180, 0.4);
+  padding: 0 20px;
+}
+
+/* Hearts Animation */
+.hearts {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  animation: fadeIn 1s ease-out 1.2s both;
+}
+
+.heart {
+  font-size: 30px;
+  display: inline-block;
+  color: #ff1744;
+  animation: heartbeat 1.5s ease-in-out infinite;
+  filter: drop-shadow(0 4px 8px rgba(255, 23, 68, 0.4))
+    drop-shadow(0 0 20px rgba(255, 23, 68, 0.3));
+  text-shadow:
+    -1px -1px 0 rgba(139, 0, 0, 0.3),
+    1px 1px 2px rgba(0, 0, 0, 0.2),
+    0 0 10px rgba(255, 105, 180, 0.5);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.3) 0%,
+    transparent 50%,
+    rgba(0, 0, 0, 0.2) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+.heart:nth-child(1) {
+  animation-delay: 0s;
+}
+.heart:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.heart:nth-child(3) {
+  animation-delay: 0.4s;
+}
+.heart:nth-child(4) {
+  animation-delay: 0.6s;
+}
+.heart:nth-child(5) {
+  animation-delay: 0.8s;
+}
+
+@keyframes heartbeat {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  10%,
+  30% {
+    transform: scale(1.2);
+  }
+  20%,
+  40% {
+    transform: scale(1);
+  }
+}
+
+/* Responsive Design */
+/* Tablet and smaller */
+@media (max-width: 768px) {
+  body {
+    height: 100vh;
+    height: 100dvh;
+    min-height: unset;
+    overflow: hidden;
+  }
+
+  .container {
+    padding: 15px 10px;
+    overflow: visible;
+    max-height: 100vh;
+    max-height: 100dvh;
+  }
+
+  .intro-title {
+    font-size: 36px;
+  }
+
+  .intro-subtitle {
+    font-size: 20px;
+  }
+
+  .petals-remaining {
+    font-size: 18px;
+    padding: 8px 20px;
+  }
+
+  #petalCount {
+    font-size: 28px;
+  }
+
+  .petal {
+    width: 50px;
+    height: 50px;
+    font-size: 50px;
+  }
+
+  .title h1 {
+    font-size: 36px;
+    letter-spacing: 1px;
+  }
+
+  .subtitle {
+    font-size: 16px;
+  }
+
+  .polaroid-container {
+    gap: 40px;
+    margin-bottom: 25px;
+  }
+
+  .polaroid-image {
+    width: 180px;
+    height: 180px;
+  }
+
+  .polaroid-caption {
+    font-size: 16px;
+  }
+
+  .countdown {
+    gap: 10px;
+    padding: 0 10px;
+    margin-bottom: 20px;
+  }
+
+  .time-box {
+    min-width: 85px;
+    padding: 18px 12px;
+  }
+
+  .time-value {
+    font-size: 40px;
+  }
+
+  .time-label {
+    font-size: 12px;
+  }
+
+  .separator {
+    font-size: 32px;
+  }
+
+  .hearts {
+    gap: 15px;
+    margin-top: 15px;
+  }
+
+  .heart {
+    font-size: 26px;
+  }
+}
+
+/* Mobile landscape and smaller */
+@media (max-width: 600px) {
+  .title h1 {
+    font-size: 32px;
+  }
+
+  .subtitle {
+    font-size: 15px;
+  }
+
+  .polaroid-container {
+    gap: 30px;
+  }
+
+  .polaroid {
+    padding: 12px;
+    padding-bottom: 45px;
+  }
+
+  .polaroid-image {
+    width: 160px;
+    height: 160px;
+  }
+
+  .time-box {
+    min-width: 75px;
+    padding: 15px 10px;
+  }
+
+  .time-value {
+    font-size: 36px;
+  }
+
+  .separator {
+    font-size: 28px;
+  }
+
+  .message {
+    font-size: 26px;
+    padding: 0 10px;
+  }
+}
+
+/* Mobile portrait */
+@media (max-width: 480px) {
+  body {
+    height: 100vh;
+    height: 100dvh;
+    min-height: unset;
+    overflow: hidden;
+  }
+
+  .container {
+    padding: 10px 5px;
+    overflow: visible;
+  }
+
+  .intro-title {
+    font-size: 28px;
+    line-height: 1.2;
+    padding: 0 10px;
+  }
+
+  .intro-subtitle {
+    font-size: 18px;
+  }
+
+  .petals-remaining {
+    font-size: 16px;
+    padding: 8px 18px;
+  }
+
+  #petalCount {
+    font-size: 24px;
+  }
+
+  .petal {
+    width: 45px;
+    height: 45px;
+    font-size: 45px;
+  }
+
+  .title {
+    margin-bottom: 25px;
+  }
+
+  .title h1 {
+    font-size: 28px;
+    letter-spacing: 1px;
+    line-height: 1.2;
+  }
+
+  .subtitle {
+    font-size: 14px;
+  }
+
+  .polaroid-container {
+    gap: 25px;
+    margin-bottom: 25px;
+  }
+
+  .polaroid {
+    padding: 10px;
+    padding-bottom: 40px;
+  }
+
+  .polaroid-image {
+    width: 140px;
+    height: 140px;
+  }
+
+  .polaroid-caption {
+    font-size: 14px;
+    margin-top: 10px;
+  }
+
+  .upload-label {
+    font-size: 35px;
+  }
+
+  .countdown {
+    gap: 6px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+
+  .time-box {
+    min-width: 70px;
+    padding: 12px 8px;
+    border-radius: 12px;
+  }
+
+  .time-value {
+    font-size: 32px;
+  }
+
+  .time-label {
+    font-size: 11px;
+    letter-spacing: 1px;
+  }
+
+  .separator {
+    font-size: 24px;
+    display: none;
+  }
+
+  .separator:nth-of-type(2) {
+    display: block;
+    width: 100%;
+    order: 1;
+    text-align: center;
+    margin: 8px 0;
+  }
+
+  .hearts {
+    gap: 12px;
+    margin-top: 25px;
+    flex-wrap: wrap;
+  }
+
+  .heart {
+    font-size: 24px;
+  }
+
+  .message {
+    font-size: 24px;
+    line-height: 1.4;
+  }
+}
+
+/* Very small screens */
+@media (max-width: 360px) {
+  .intro-title {
+    font-size: 24px;
+  }
+
+  .intro-subtitle {
+    font-size: 16px;
+  }
+
+  .petal {
+    width: 40px;
+    height: 40px;
+    font-size: 40px;
+  }
+
+  .title h1 {
+    font-size: 24px;
+  }
+
+  .polaroid-image {
+    width: 120px;
+    height: 120px;
+  }
+
+  .time-box {
+    min-width: 65px;
+    padding: 10px 6px;
+  }
+
+  .time-value {
+    font-size: 28px;
+  }
+
+  .time-label {
+    font-size: 10px;
+  }
+
+  .countdown {
+    gap: 5px;
+  }
+
+  .heart {
+    font-size: 22px;
+  }
+}
+
+/* Improve touch targets for mobile */
+@media (hover: none) and (pointer: coarse) {
+  .upload-label {
+    padding: 15px;
+    font-size: 45px;
+  }
+
+  .polaroid:hover {
+    transform: rotate(0deg);
+  }
+
+  .time-box:hover {
+    transform: none;
+  }
+
+  /* Show upload overlay - no hover, click only */
+  .polaroid-image:has(img[src]:not([src=""])) .upload-overlay {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .polaroid-image:has(img[src]:not([src=""])):active .upload-overlay {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  /* Upload overlay always visible when no image */
+  .polaroid-image:not(:has(img[src]:not([src=""]))) .upload-overlay {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+/* Landscape orientation specific */
+@media (max-height: 500px) and (orientation: landscape) {
+  body {
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .container {
+    padding: 10px;
+    overflow: visible;
+  }
+
+  .polaroid-container {
+    margin-bottom: 15px;
+  }
+
+  .title {
+    margin-bottom: 15px;
+  }
+
+  .title h1 {
+    font-size: 24px;
+  }
+
+  .subtitle {
+    font-size: 13px;
+  }
+
+  .polaroid-image {
+    width: 100px;
+    height: 100px;
+  }
+
+  .polaroid {
+    padding: 8px;
+    padding-bottom: 30px;
+  }
+
+  .time-box {
+    padding: 10px 8px;
+  }
+
+  .time-value {
+    font-size: 28px;
+  }
+
+  .hearts {
+    margin-top: 15px;
+  }
+
+  .heart {
+    font-size: 20px;
+  }
+}
