@@ -2,7 +2,7 @@
 // INTRO OVERLAY WITH FLOWER PETALS
 // ============================================
 
-const petalEmojis = ["🌸", "🌺", "🌼", "🌻", "🌷", "🥀", "💐"];
+const petalEmojis = ["🌸", "🌺", "🌼", "🌻", "🌷", "🥀"];
 const totalPetals = 28;
 let remainingPetals = totalPetals;
 
