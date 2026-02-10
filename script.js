@@ -98,7 +98,7 @@ function revealTimer() {
   // Show completion message briefly
   introContent.innerHTML = `
     <h2 class="intro-title" style="animation: fadeInScale 0.5s ease-out;">✨ Perfect! ✨</h2>
-    <p class="intro-subtitle">Revealing your countdown...</p>
+    <p class="intro-subtitle">Revealing our countdown...</p>
   `;
 
   // Hide overlay after delay
